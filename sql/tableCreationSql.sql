@@ -5,7 +5,7 @@ use forexNetting;
 SET sql_notes = 0;
 
 create table if not exists instrumentInfo (
-	ccyId int primary key,
+	ccyId int auto_increment primary key ,
 	ccyCode varchar(255),
 	ccyDescription text,
 	ccyVariance decimal(5,2),
@@ -13,7 +13,7 @@ create table if not exists instrumentInfo (
 );
 
 create table if not exists tradeType (
-	tradeTypeId int primary key,
+	tradeTypeId int auto_increment primary key,
 	tradeTypeName varchar(255)
 );
     
@@ -24,8 +24,8 @@ create table if not exists role(
 );
 
 create table if not exists user (
-	userId int primary key,
-	username varchar(255) unique,
+	userId int primary key auto_increment,
+	username varchar(255),
 	password varchar(255),
 	roleId int references role.roleId
 );
@@ -34,6 +34,7 @@ create table if not exists client(
 	clientId int primary key,
 	clientCode varchar(255) unique,
 	clientName varchar(255),
+	clientCountry varchar(255),
 	clientTradingLimit bigint,
 	foreign key(clientId) references user(userId)
 );
@@ -65,4 +66,16 @@ create table if not exists orders (
     
     
 SET sql_notes = 1;
+
+insert into role values 
+(1,'broker'), 
+(2,'client');
+
+insert into instrumentInfo(ccyCode , ccyDescription , ccyLot , ccyVariance) values
+('EUR/USD' , 'Euro/US Dollar', 1 , 5),
+('GBP/EUR' , 'British Pound/Euro', 1, 5),
+('GBP/USD' , 'British Pound/US Dollar', 1, 5);
+
+insert into tradeType (tradeTypeName) values
+('SPOT')
     
