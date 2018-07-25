@@ -1,7 +1,7 @@
 package com.db.FxOrderNetting.controller;
 
 
-import com.db.FxOrderNetting.implementation.LoginImplementation;
+import com.db.FxOrderNetting.repository.LoginImplementation;
 import com.db.FxOrderNetting.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

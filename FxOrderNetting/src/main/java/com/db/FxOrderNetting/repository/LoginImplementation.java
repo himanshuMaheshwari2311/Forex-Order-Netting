@@ -1,4 +1,4 @@
-package com.db.FxOrderNetting.implementation;
+package com.db.FxOrderNetting.repository;
 
 import com.db.FxOrderNetting.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
