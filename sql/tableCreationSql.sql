@@ -55,7 +55,7 @@ create table if not exists orders (
     ccyId int references instrumentInfo(ccyId),
     baseNotional bigint,
     direction char,
-    price bigint,
+    price decimal(9,8),
     tradeTypeId int references tradeType(tradeTypeId),
     tradeDate date,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
