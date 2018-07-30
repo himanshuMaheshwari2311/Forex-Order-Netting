@@ -2,6 +2,7 @@ package com.db.FxOrderNetting.model;
 
 public class User {
     public int userId;
+    public String name;
     public String userName;
     public String password;
     public  int roleId;
@@ -38,10 +39,19 @@ public class User {
         this.roleId = roleId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
+                ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", roleId=" + roleId +

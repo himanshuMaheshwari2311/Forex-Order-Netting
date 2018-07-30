@@ -15,7 +15,7 @@ public class LoginController {
     LoginImplementation loginImplementation;
 
     @RequestMapping(value="/authentication")
-    public boolean authentication(@RequestBody User user){
+    public User authentication(@RequestBody User user){
         return loginImplementation.validateLogin(user);
     }
 }
