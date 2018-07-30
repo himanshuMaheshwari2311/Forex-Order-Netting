@@ -28,7 +28,8 @@ BEGIN
 								where c.clientId = a.clientId and c.ccyId=a.ccyId and c.direction='S')) as "net"
 	FROM client c join orders a on c.clientId = a.clientId
 	join instrumentinfo i on a.ccyId = i.ccyId
-	group by c.clientName, a.ccyId
+	group by c.clientName, a.ccyId;
 END$$
 
 DELIMITER ;
+call forexnetting.clientNetting();

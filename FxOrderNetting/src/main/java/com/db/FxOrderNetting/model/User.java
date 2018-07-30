@@ -6,6 +6,26 @@ public class User {
     public String userName;
     public String password;
     public  int roleId;
+    public String currCode;
+    public int netCurrVal;
+
+    public String getCurrCode() {
+        return currCode;
+    }
+
+    public void setCurrCode(String currCode) {
+        this.currCode = currCode;
+    }
+
+    public int getNetCurrVal() {
+        return netCurrVal;
+    }
+
+    public void setNetCurrVal(int netCurrVal) {
+        this.netCurrVal = netCurrVal;
+    }
+
+
 
     public int getUserId() {
         return userId;
