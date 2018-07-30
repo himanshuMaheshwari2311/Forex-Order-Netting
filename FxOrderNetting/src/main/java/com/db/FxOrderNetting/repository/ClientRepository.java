@@ -12,7 +12,6 @@ public class ClientRepository {
 
     public String getNameByClientId(int clientId){
         String getNameSql = "select clientName from client where clientId = ? ";
-        System.out.println(getNameSql );
         String name = (String) jdbcTemplate.queryForObject(
                 getNameSql, new Object[] { clientId }, String.class);
         return name;

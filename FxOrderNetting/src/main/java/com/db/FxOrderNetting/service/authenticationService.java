@@ -7,12 +7,11 @@ import com.db.FxOrderNetting.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
+@Service
 public class authenticationService {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -34,6 +33,6 @@ public class authenticationService {
                  matchedUser.setName(clientRepository.getNameByClientId(matchedUser.getUserId()));
              }
         }
-        return matchedUser;
+        return new User();
     }
 }
