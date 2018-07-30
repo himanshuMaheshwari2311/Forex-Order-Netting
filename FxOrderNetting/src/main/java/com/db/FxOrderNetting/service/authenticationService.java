@@ -32,7 +32,10 @@ public class authenticationService {
              else{
                  matchedUser.setName(clientRepository.getNameByClientId(matchedUser.getUserId()));
              }
+             return matchedUser;
         }
-        return new User();
+        else{
+            return new User();
+        }
     }
 }

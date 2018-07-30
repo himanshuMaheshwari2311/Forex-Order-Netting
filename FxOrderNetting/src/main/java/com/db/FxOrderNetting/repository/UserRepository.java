@@ -14,10 +14,13 @@ public class UserRepository {
 
     public User getUserByUsernameAndPassword(String username , String password){
         User matchedUser = null;
+        System.out.println("username : "+ username + " password: "+password);
         String sql = "select * from user where username = ? and password = ? ";
         try {
             matchedUser = jdbcTemplate.queryForObject(sql , new Object[]{username , password},
                     new BeanPropertyRowMapper<>(User.class));
+            System.out.println("here");
+            return matchedUser;
         }
         catch (Exception e) {
         }

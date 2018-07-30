@@ -5,7 +5,7 @@ public class Orders {
     public int clientId;
     public int ccyId;
     public long baseNotional;
-    public char direction;
+    public String direction;
     public float price;
     public int tradeTypeId;
     //public datetime tradeDate;
@@ -47,11 +47,11 @@ public class Orders {
         this.baseNotional = baseNotional;
     }
 
-    public char getDirection() {
+    public String getDirection() {
         return direction;
     }
 
-    public void setDirection(char direction) {
+    public void setDirection(String direction) {
         this.direction = direction;
     }
 
@@ -69,5 +69,18 @@ public class Orders {
 
     public void setTradeTypeId(int tradeTypeId) {
         this.tradeTypeId = tradeTypeId;
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderId=" + orderId +
+                ", clientId=" + clientId +
+                ", ccyId=" + ccyId +
+                ", baseNotional=" + baseNotional +
+                ", direction=" + direction +
+                ", price=" + price +
+                ", tradeTypeId=" + tradeTypeId +
+                '}';
     }
 }

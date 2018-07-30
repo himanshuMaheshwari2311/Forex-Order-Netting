@@ -47,14 +47,5 @@ public class InstrumentInfo {
         this.ccyLot = ccyLot;
     }
 
-    @Override
-    public String toString() {
-        return "InstrumentInfo{" +
-                "ccyId=" + ccyId +
-                ", ccyCode='" + ccyCode + '\'' +
-                ", ccyDescription='" + ccyDescription + '\'' +
-                ", ccyVariance=" + ccyVariance +
-                ", ccyLot=" + ccyLot +
-                '}';
-    }
+
 }
