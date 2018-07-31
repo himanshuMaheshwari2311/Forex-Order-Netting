@@ -7,24 +7,18 @@
                         <h4 class="title">Create Order</h4>
                     </div>
                     <div class="content">
-                        <form>
+                        <form novalidate (ngSubmit)="createOrder(orderForm)" #orderForm="ngForm">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Clent Code</label>
-                                        <input type="text" class="form-control" placeholder="Company" value="">
+                                        <input type="text" class="form-control" placeholder="Company" value="{{user_code}}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" class="form-control" placeholder="Last Name" value="">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Last Name" value="">
+                                        <label>Full Name</label>
+                                        <input type="text" class="form-control" placeholder="Full Name" value="{{user_full_name}}">
                                     </div>
                                 </div>
                             </div>
@@ -32,32 +26,32 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Order Type</label>
-                                        <select name="Order Type" class="form-control" placeholder="" value=""> 
+                                        <select name="Order Type" class="form-control" placeholder="" value="" [(ngModel)]="order.tradeTypeId" name="tradeTypeId"> 
                                           <option value="" disabled selected>--Select--</option>
-                                          <option>Spot Order</option>
-                                          <option>FX Rate Order</option>
-                                          <option>Market Order</option>
+                                          <option value=1>Spot Order</option>
+                                          <option value=2>FX Rate Order</option>
+                                          <option value=3>Market Order</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Currency Pair</label>
-                                        <select name="Currency Type" class="form-control" placeholder="" value=""> 
+                                        <select type="number" name="Currency Type" class="form-control" placeholder="" value="" [(ngModel)]="order.ccyId" name="ccyId"> 
                                           <option value="" disabled selected>--Select--</option>
-                                          <option>EUR/USD</option>
-                                          <option>GBP/USD</option>
-                                          <option>EUR/GBP</option>
+                                          <option value=1>EUR/USD</option>
+                                          <option value=2>GBP/USD</option>
+                                          <option value=3>GBP/EUR</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Currency Pair</label>
-                                        <select name="Trade Type" class="form-control" placeholder="" value=""> 
+                                        <label>Direction</label>
+                                        <select name="Trade Type" class="form-control" placeholder="" value="" [(ngModel)]="order.direction" name="direction"> 
                                           <option value="" disabled selected >--Select--</option>
-                                          <option>Buy</option>
-                                          <option>Sell</option>
+                                          <option value="B">Buy</option>
+                                          <option value="S">Sell</option>
                                         </select>
                                     </div>
                                 </div>
@@ -66,7 +60,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Base Notional Amount</label>
-                                        <input type="number" class="form-control" placeholder="Base Notional Ammount" value="">
+                                        <input type="number" class="form-control" placeholder="Base Notional Ammount" value="" [(ngModel)]="order.baseNotional" name="baseNotional">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" value= "getClientId()" [(ngModel)]="order.clientId" name="clientId" >
                                     </div>
                                 </div>
                             </div>

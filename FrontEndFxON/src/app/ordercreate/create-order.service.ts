@@ -4,12 +4,12 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class CreateOrderService {
 
   constructor(private http: HttpClient) { }
 
-  userLogin(user){
-     return this.http.post("http://localhost:8090/authentication/login", user);
+  createOrder(order_data){
+    return this.http.post("http://localhost:8090/orders/addNew",order_data);
   }
 
 }

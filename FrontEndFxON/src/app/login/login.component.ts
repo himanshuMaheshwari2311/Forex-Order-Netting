@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { User } from '../user';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-login',
@@ -10,7 +11,11 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
 
   private user =new User( );
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) {
+    if(sessionStorage.length > 0){
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   ngOnInit() {
     
@@ -20,12 +25,18 @@ export class LoginComponent implements OnInit {
     this.user = value;
     console.log(value);
     this.loginService.userLogin(this.user).subscribe(data=>{
-          if(data == null){
+        if(data['userId'] == 0){
             console.log("Invalid Login");
           }
-          console.log(data['userName']);
+        else{
+          sessionStorage.setItem('curr_sess', JSON.stringify(data));
+          console.log(sessionStorage.getItem('curr_sess'));
+          this.router.navigate(['/dashboard']);
+        }
       });
 
   }
+
+  
 
 }

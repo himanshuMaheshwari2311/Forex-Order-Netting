@@ -12,4 +12,8 @@ export class WatchlistComponent implements OnInit {
   ngOnInit() {
   }
 
+  getMarketPrice() {
+    
+  }
+
 }
