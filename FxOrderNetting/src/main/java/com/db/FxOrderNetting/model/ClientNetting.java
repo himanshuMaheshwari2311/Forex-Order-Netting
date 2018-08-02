@@ -1,9 +1,20 @@
 package com.db.FxOrderNetting.model;
 
+import java.util.Date;
+
 public class ClientNetting {
     public String clientName;
     public String ccyCode;
     public long net;
+    public Date valueDate;
+
+    public Date getValueDate() {
+        return valueDate;
+    }
+
+    public void setValueDate(Date valueDate) {
+        this.valueDate = valueDate;
+    }
 
     public String getClientName() {
         return clientName;

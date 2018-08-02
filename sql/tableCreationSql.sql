@@ -54,17 +54,23 @@ create table if not exists orders (
     clientId int references client(clientId),
     ccyId int references instrumentInfo(ccyId),
     baseNotional bigint,
+    quoteCurrency decimal(20,10),
     direction char,
     price decimal(9,8),
     tradeTypeId int references tradeType(tradeTypeId),
-    tradeDate date,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+	valueDate date,
+    tradeDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
     modifiedAt TIMESTAMP DEFAULT NULL,
     cancelledAt TIMESTAMP DEFAULT NULL,
     deletedAt TIMESTAMP DEFAULT NULL
+    );
+    
+
+create table holidays(
+	holidayDate date
 );
-    
-    
+
+
 SET sql_notes = 1;
 
 insert into role values 
@@ -77,5 +83,7 @@ insert into instrumentInfo(ccyCode , ccyDescription , ccyLot , ccyVariance) valu
 ('GBP/USD' , 'British Pound/US Dollar', 1, 5);
 
 insert into tradeType (tradeTypeName) values
-('SPOT')
-    
+('Cash'),
+('Tom'),
+('Spot'),
+('Forward');

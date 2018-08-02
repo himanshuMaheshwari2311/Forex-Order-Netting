@@ -7,6 +7,13 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -21,13 +28,13 @@ public class OrderRepository {
     }
 
     public boolean CreateNewOrder(Orders order){
-        String sql = "insert into orders (clientId, ccyId, baseNotional, direction, price, tradeTypeId)" +
-                     " values(?,?,?,?,?,?)";
+        String sql = "insert into orders (clientId, ccyId, baseNotional, quoteCurrency ,direction, price, tradeTypeId, valueDate )" +
+                     " values(?,?,?,?,?,?,?,?)";
         System.out.println(sql);
         try{
             jdbcTemplate.update(sql, order.getClientId() , order.getCcyId(),
-                   order.getBaseNotional(), order.getDirection(),
-                   order.getPrice(), order.getTradeTypeId());
+                   order.getBaseNotional(), order.getQuoteCurrency(), order.getDirection(),
+                   order.getPrice(), order.getTradeTypeId(), order.getValueDate());
             return true;
         }
         catch(Exception e){
@@ -40,5 +47,31 @@ public class OrderRepository {
                 "where TradeDate is not null "+
                 "order by createdAt";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Orders.class));
+    }
+
+    public void setValueDate(Orders o){
+        Date tradeDate = o.getTradeDate();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(tradeDate);
+        c.add(Calendar.DATE,  + o.getTradeTypeId() - 1);
+        int addDays = 0;
+        if(c.get(Calendar.DAY_OF_WEEK) == 7)
+            addDays += 2;
+        if(c.get(Calendar.DAY_OF_WEEK)==1)
+            addDays += 1;
+        c.add(Calendar.DATE,  + addDays);
+        o.setValueDate(c.getTime());
+        String sql = "update orders set valueDate = ? where orderId = ?";
+        jdbcTemplate.update(sql , new Object[]{o.valueDate , o.orderId});
+    }
+
+    public void setValueDateOfAllOrders(){
+        List<Orders> allOrders = getAllOrders();
+        for (Orders o : allOrders) {
+            if(o.getValueDate() == null){
+                setValueDate(o);
+            }
+        }
     }
 }

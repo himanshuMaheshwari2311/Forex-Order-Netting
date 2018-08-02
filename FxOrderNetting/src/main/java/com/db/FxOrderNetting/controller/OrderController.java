@@ -18,7 +18,7 @@ public class OrderController {
 
     @RequestMapping(value = "/addNew")
     public String placeNewOrder(@RequestBody Orders order){
-        System.out.println(order);
+        orderService.setValueDate(order);
         if(orderService.placeNewOrder(order))
             return "Order placed successfully";
         else
@@ -33,5 +33,10 @@ public class OrderController {
     @RequestMapping(value = "/getAllTrade")
     public List<Orders> getAllTrades(){
         return orderService.getAllTrades();
+    }
+
+    @RequestMapping(value= "/setValueDate")
+    public void setValueDate(){
+        orderService.setValueDateOfAllOrders();
     }
 }

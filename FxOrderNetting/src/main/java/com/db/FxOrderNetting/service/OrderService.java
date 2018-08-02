@@ -25,4 +25,12 @@ public class OrderService {
     public List<Orders> getAllTrades() {
         return orderRepository.getAllTrades();
     }
+
+    public void setValueDateOfAllOrders(){
+        orderRepository.setValueDateOfAllOrders();
+    }
+
+    public void setValueDate(Orders order){
+        orderRepository.setValueDate(order);
+    }
 }
