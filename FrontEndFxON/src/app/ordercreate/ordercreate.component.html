@@ -37,11 +37,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Currency Pair</label>
-                                        <select type="number" name="Currency Type" class="form-control" placeholder="" value="" [(ngModel)]="order.ccyId" name="ccyId" required> 
+                                        <select type="number" name="Currency Type" ngModel (ngModelChange)="getDetails(e1.value)" class="form-control" [(ngModel)]="order.ccyId" name="ccyId" required> 
                                           <option value="" disabled selected>--Select--</option>
-                                          <option value=1>EUR/USD</option>
-                                          <option value=3>GBP/USD</option>
-                                          <option value=2>GBP/EUR</option>
+                                          <option value=1 #e1>EUR/USD</option>
+                                          <option value=3 #g1>GBP/USD</option>
+                                          <option value=2 #g2>GBP/EUR</option>
                                         </select>
                                     </div>
                                 </div>
@@ -81,6 +81,27 @@
                         </form>
                     </div>
                 </div>
+            </div>
+            <div class="card col-md-4">
+                <div class="header">
+                    <h4 class="title">Latest Rates</h4>
+                    <p class="category">{{this.time}}</p>
+                </div>
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-hover table-striped">
+                          <thead>
+                              <tr>
+                                  <th *ngFor="let cell of headerRow">{{cell}}</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let row of dataRows">
+                                  <td *ngFor="let cell of row">{{cell}}</td>
+                              </tr>
+                          </tbody>
+                    </table>
+
+              </div>
             </div>
         </div>
     </div>
