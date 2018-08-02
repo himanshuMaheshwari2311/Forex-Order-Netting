@@ -26,33 +26,70 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Order Type</label>
-                                        <select name="Order Type" class="form-control" placeholder="" value="" [(ngModel)]="order.tradeTypeId" name="tradeTypeId"> 
+                                        <select name="Order Type" class="form-control" ngModel (ngModelChange)="getOrderType($event)" [(ngModel)]="order.tradeTypeId" name="tradeTypeId"> 
                                           <option value="" disabled selected>--Select--</option>
-                                          <option value=1>Spot Order</option>
-                                          <option value=2>FX Rate Order</option>
-                                          <option value=3>Market Order</option>
+                                          <option [ngValue]=1>Cash</option>
+                                          <option [ngValue]=2>TOM</option>
+                                          <option [ngValue]=3>SPOT</option>
+                                          <option [ngValue]=3>Forward</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Currency Pair</label>
-                                        <select type="number" name="Currency Type" ngModel (ngModelChange)="getDetails(e1.value)" class="form-control" [(ngModel)]="order.ccyId" name="ccyId" required> 
+                                        <select type="number" name="Currency Type" ngModel (ngModelChange)="getCurrencyPair($event)" class="form-control" [(ngModel)]="order.ccyId" name="ccyId" required> 
                                           <option value="" disabled selected>--Select--</option>
-                                          <option value=1 #e1>EUR/USD</option>
-                                          <option value=3 #g1>GBP/USD</option>
-                                          <option value=2 #g2>GBP/EUR</option>
+                                          <option [ngValue]=1 #e1>EUR/USD</option>
+                                          <option [ngValue]=3 #g1>GBP/USD</option>
+                                          <option [ngValue]=2 #g2>GBP/EUR</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Currency 1</label>
+                                        <select type="number" name="Currency 1" ngModel (ngModelChange)="getCurrency1($event)" class="form-control"> 
+                                          <option value="" disabled selected>--Select--</option>
+                                          <option [ngValue]=1 #e1>EUR</option>
+                                          <option [ngValue]=3 #g1>GBP</option>
+                                          <option [ngValue]=2 #g2>USD</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Direction</label>
-                                        <select name="Trade Type" class="form-control" placeholder="" value="" [(ngModel)]="order.direction" name="direction"> 
+                                        <select name="Trade Type" class="form-control" ngModel (ngModelChange)="getDirection($event)" [(ngModel)]="order.direction" name="direction"> 
                                           <option value="" disabled selected >--Select--</option>
                                           <option value="B">Buy</option>
                                           <option value="S">Sell</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Currency 2</label>
+                                        <select type="number" name="Currency 2" ngModel (ngModelChange)="getCurrency2($event)" class="form-control"required> 
+                                          <option value="" disabled selected>--Select--</option>
+                                          <option [ngValue]=1 >EUR</option>
+                                          <option [ngValue]=3 >GBP</option>
+                                          <option [ngValue]=2 >USD</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Execution Date</label>
+                                        <input type="text" class="form-control" value="{{this.date}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="number" class="form-control" value="{{this.currencyPrice}}">
                                     </div>
                                 </div>
                             </div>
@@ -60,13 +97,13 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Base Notional Amount</label>
-                                        <input type="number" class="form-control" placeholder="Base Notional Ammount" value="" [(ngModel)]="order.baseNotional" name="baseNotional">
+                                        <input type="number" class="form-control" placeholder="Base Notional Ammount" value="" ngModel (ngModelChange)="getBase($event)" [(ngModel)]="order.baseNotional" name="baseNotional">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Trade Date</label>
-                                        <input type="date" class="form-control" value=""><!--[(ngModel)]="order.date" name="date"-->
+                                        <label>Quote Price</label>
+                                        <input type="number" class="form-control" placeholder="Quote Price" value="{{this.quotePrice}}">
                                     </div>
                                 </div>
 

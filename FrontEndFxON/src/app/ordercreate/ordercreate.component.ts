@@ -15,6 +15,17 @@ export class OrdercreateComponent implements OnInit {
   public headerRow : string[];
   public dataRows = new Array();
   time: any;
+  price = [0, 0, 0]
+
+  orderType;
+  currencyPair;
+  direction;
+  currencyPrice;
+  date;
+  base;
+  quotePrice;
+  currency1;
+  currency2;
   
   private order = new Order();
   
@@ -31,6 +42,7 @@ export class OrdercreateComponent implements OnInit {
         var data = new Array();
         data.push(res[i]['symbol']);
         data.push(res[i]['price']);
+        this.price[i] = res[i]['price'];
         this.dataRows.push(data);
         this.time = new Date(res[i]['timestamp'] * 1000);
       }
@@ -48,8 +60,9 @@ export class OrdercreateComponent implements OnInit {
     this.order['tradeTypeId'] = Number(this.order['tradeTypeId']);
     this.order['ccyId'] = Number(this.order['ccyId']);
     this.order['clientId'] = this.obj['userId'];
-    this.order['price'] = 1.774;
-    
+    this.order['price'] = this.price[this.order['ccyId'] - 1];
+    this.order['quoteCurrency'] = this.quotePrice;
+    console.log(new Date().getDate());
     console.log(this.order);
 
     this.coService.createOrder(this.order).subscribe(data=>{
@@ -57,8 +70,63 @@ export class OrdercreateComponent implements OnInit {
     });
 
   }
-  getDetails(value){
-    
+  getOrderType(value){
+    console.log(value);
+    this.orderType = value;
+    var td = new Date();
+    var date, month, year;
+    month = td.getMonth() + 1;
+    year = td.getFullYear();
+    if(value == 1 || value == 3){
+      date = td.getDate();
+    }
+    else if(value == 2){
+      td.setDate(td.getDate() + 1);
+      date = td.getDate();
+    }
+    else if(value == 4){
+      td.setDate(td.getDate() + 3);
+      date = td.getDate();
+    }
+    this.date = date + "/" + month + "/" + year;
   }
+  
+  getCurrencyPair(value){
+    console.log(value);
+    this.currencyPair = value;
+    
+    this.currencyPrice = this.price[value - 1];
+  }
+  
+  // getCurrency1(value){
+  //   console.log(value);
+  //   if(value == 1)
+  //     this.currency1 = "EUR";
+  //   else if(value == 2)
+  //     this.currency1 = "GBP";
+  //   else this.currency1 == "USD";
+  //   console.log(this.currency1);
+  // }
+  
+  // getCurrency2(value){
+  //   console.log(value);
+  //   if(value == 1)
+  //     this.currency2 = "EUR";
+  //   else if(value == 2)
+  //     this.currency2 = "GBP";
+  //   else this.currency2 == "USD";
+  //   if(this.currency1 == "EUR" && this.direction == )
+  //   this.currencyPrice = this.price[value - 1];
+  // }
+  
 
+  getDirection(value){
+    console.log(value);
+    this.direction = value;
+  }
+  getBase(value){
+    console.log(value);
+    this.base = value;
+    this.quotePrice = value * this.currencyPrice;
+  }
 }

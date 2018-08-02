@@ -50,7 +50,7 @@ export class WatchlistComponent implements OnInit {
           zoomType: 'x'
         },
         title: {
-          text: 'USD to EUR exchange rate over time'
+          text: 'EUR/USD exchange rate over time'
         },
         subtitle: {
           text: document.ontouchstart === undefined ?
@@ -78,7 +78,7 @@ export class WatchlistComponent implements OnInit {
               },
               stops: [
                 [0, 'rgb(255, 255, 255)'],
-                [1, 'rgb(240, 240, 255)']
+                [1, 'rgb(239, 228, 141)']
                 ]
             },
             marker: {
@@ -95,7 +95,7 @@ export class WatchlistComponent implements OnInit {
         },
         series: [{
           type: 'area',
-          name: 'USD to EUR',
+          name: 'EUR/USD',
           data: data
         }]
       }
@@ -115,7 +115,7 @@ export class WatchlistComponent implements OnInit {
           zoomType: 'x'
         },
         title: {
-          text: 'EUR to GBP exchange rate over time'
+          text: 'GBP/EUR exchange rate over time'
         },
         subtitle: {
           text: document.ontouchstart === undefined ?
@@ -143,7 +143,7 @@ export class WatchlistComponent implements OnInit {
               },
               stops: [
                 [0, 'rgb(255, 255, 255)'],
-                [1, 'rgb(240, 240, 255)']
+                [1, 'rgb(109, 224, 117)']
                 ]
             },
             marker: {
@@ -161,7 +161,7 @@ export class WatchlistComponent implements OnInit {
   
         series: [{
           type: 'area',
-          name: 'EUR to GBP',
+          name: 'GBP/EUR',
           data: data
         }]
     
@@ -182,7 +182,7 @@ export class WatchlistComponent implements OnInit {
           zoomType: 'x'
         },
         title: {
-          text: 'USD to GBP exchange rate over time'
+          text: 'GBP/USD exchange rate over time'
         },
         subtitle: {
           text: document.ontouchstart === undefined ?
@@ -210,7 +210,7 @@ export class WatchlistComponent implements OnInit {
               },
               stops: [
                 [0, 'rgb(255, 255, 255)'],
-                [1, 'rgb(240, 240, 255)']
+                [1, 'rgb(226, 93, 95)']
                 ]
             },
             marker: {
@@ -228,7 +228,7 @@ export class WatchlistComponent implements OnInit {
   
         series: [{
           type: 'area',
-          name: 'USD to GBP',
+          name: 'GBP/USD',
           data: data
         }]
     

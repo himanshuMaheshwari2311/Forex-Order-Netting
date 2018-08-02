@@ -5,5 +5,6 @@ export class Order {
     direction: String;
     price: number;
     tradeTypeId: number;
+    quoteCurrency: number;
     
 }

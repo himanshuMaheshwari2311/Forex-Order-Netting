@@ -13,16 +13,40 @@ export class DashboardComponent implements OnInit {
 
   public headerRow: string[];
   public dataRows = new Array();
+  public headerRow1: string[];
+  public dataRows1 = new Array();
   obj: any;
 
   @ViewChild('Buy') Buy: ElementRef;
   @ViewChild('Sell') Sell: ElementRef;
+  
+  @ViewChild('EURUSD') EURUSD: ElementRef;
+  @ViewChild('GBPEUR') GBPEUR: ElementRef;
+  @ViewChild('GBPUSD') GBPUSD: ElementRef;
+  chart3: HighCharts.ChartObject;
+  chart4: HighCharts.ChartObject;
+  chart5: HighCharts.ChartObject;
   chart1 : Highcharts.ChartObject;
   chart2 : Highcharts.ChartObject;
+
+  time;
   
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.headerRow1 = ["Currency Pair", "Bid", "Ask", "Price"];
+    this.http.get("https://forex.1forge.com/1.0.3/quotes?pairs=EURUSD,GBPEUR,GBPUSD&api_key=qlajbqVH3vSEL3pn2EgoHQ6mwdKvKMRU").subscribe(res=>{
+      for(var i in res){
+        var data = new Array();
+        data.push(res[i]['symbol']);
+        data.push(res[i]['bid']);
+        data.push(res[i]['ask']);
+        data.push(res[i]['price']);
+        this.dataRows1.push(data);
+        this.time = new Date(res[i]['timestamp'] * 1000);
+      }
+    });
+
     this.headerRow = ["Trade Number", "Currency Pair", "Base Notional", "Price", "Volume", "Direction"];
     this.http.post("http://localhost:8090/orders/getAllTrade", null).subscribe(res=>{
       for(var data in res){
@@ -121,6 +145,7 @@ export class DashboardComponent implements OnInit {
       }
       this.chart1 = chart(this.Buy.nativeElement, options);
     });
+
     this.http.get("http://localhost:8090/orders/getAllTrade").subscribe(res=>{
       var obj = JSON.parse(sessionStorage.getItem('curr_sess'));
       var name = obj['name'];
@@ -189,6 +214,205 @@ export class DashboardComponent implements OnInit {
       }]
       }
       this.chart2 = chart(this.Sell.nativeElement, options);
+    });
+
+    this.http.get("https://api.ofx.com/PublicSite.ApiService/SpotRateHistory/month/EUR/USD?DecimalPlaces=6&ReportingInterval=daily").subscribe(res=>{
+      var data = new Array();
+      for (var i in res['HistoricalPoints']){
+        var temp = new Array();
+        temp.push(res['HistoricalPoints'][i]['PointInTime']/1000);
+        temp.push(res['HistoricalPoints'][i]['InterbankRate']);
+        data.push(temp);
+      }
+      const options: HighCharts.Options = {
+        chart: {
+          zoomType: 'x'
+        },
+        title: {
+          text: 'EUR/USD exchange rate over time'
+        },
+        subtitle: {
+          text: document.ontouchstart === undefined ?
+              'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        },
+        xAxis: {
+          type: 'datetime'
+        },
+        yAxis: {
+          title: {
+            text: 'Exchange rate'
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          area: {
+            fillColor: {
+              linearGradient: {
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 1
+              },
+              stops: [
+                [0, 'rgb(255, 255, 255)'],
+                [1, 'rgb(239, 228, 141)']
+                ]
+            },
+            marker: {
+              radius: 2
+            },
+            lineWidth: 1,
+            states: {
+              hover: {
+                lineWidth: 1
+              }
+            },
+            threshold: null
+          }
+        },
+        series: [{
+          type: 'area',
+          name: 'EUR/USD',
+          data: data
+        }]
+      }
+      this.chart3 = chart(this.EURUSD.nativeElement, options);
+    });
+
+    this.http.get("https://api.ofx.com/PublicSite.ApiService/SpotRateHistory/month/GBP/EUR?DecimalPlaces=6&ReportingInterval=daily").subscribe(res=>{
+      var data = new Array();
+      for (var i in res['HistoricalPoints']){
+        var temp = new Array();
+        temp.push(res['HistoricalPoints'][i]['PointInTime']/1000);
+        temp.push(res['HistoricalPoints'][i]['InterbankRate']);
+        data.push(temp);
+      }
+      const options: HighCharts.Options = {
+        chart: {
+          zoomType: 'x'
+        },
+        title: {
+          text: 'GBP/EUR exchange rate over time'
+        },
+        subtitle: {
+          text: document.ontouchstart === undefined ?
+              'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        },
+        xAxis: {
+          type: 'datetime'
+        },
+        yAxis: {
+          title: {
+            text: 'Exchange rate'
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          area: {
+            fillColor: {
+              linearGradient: {
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 1
+              },
+              stops: [
+                [0, 'rgb(255, 255, 255)'],
+                [1, 'rgb(109, 224, 117)']
+                ]
+            },
+            marker: {
+              radius: 2
+            },
+            lineWidth: 1,
+            states: {
+              hover: {
+                lineWidth: 1
+              }
+            },
+            threshold: null
+          }
+        },
+  
+        series: [{
+          type: 'area',
+          name: 'GBP/EUR',
+          data: data
+        }]
+    
+      }
+      this.chart4 = chart(this.GBPEUR.nativeElement, options);
+    });
+
+    this.http.get("https://api.ofx.com/PublicSite.ApiService/SpotRateHistory/month/GBP/USD?DecimalPlaces=6&ReportingInterval=daily").subscribe(res=>{
+      var data = new Array();
+      for (var i in res['HistoricalPoints']){
+        var temp = new Array();
+        temp.push(res['HistoricalPoints'][i]['PointInTime']/1000);
+        temp.push(res['HistoricalPoints'][i]['InterbankRate']);
+        data.push(temp);
+      }
+      const options: HighCharts.Options = {
+        chart: {
+          zoomType: 'x'
+        },
+        title: {
+          text: 'GBP/USD exchange rate over time'
+        },
+        subtitle: {
+          text: document.ontouchstart === undefined ?
+              'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        },
+        xAxis: {
+          type: 'datetime'
+        },
+        yAxis: {
+          title: {
+            text: 'Exchange rate'
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          area: {
+            fillColor: {
+              linearGradient: {
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 1
+              },
+              stops: [
+                [0, 'rgb(255, 255, 255)'],
+                [1, 'rgb(226, 93, 95)']
+                ]
+            },
+            marker: {
+              radius: 2
+            },
+            lineWidth: 1,
+            states: {
+              hover: {
+                lineWidth: 1
+              }
+            },
+            threshold: null
+          }
+        },
+  
+        series: [{
+          type: 'area',
+          name: 'GBP/USD',
+          data: data
+        }]
+    
+      }
+      this.chart5 = chart(this.GBPUSD.nativeElement, options);
     });
 
 }

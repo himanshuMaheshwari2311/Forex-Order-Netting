@@ -79,8 +79,7 @@ idNameMap = {"MESUT OZIL": 1, "THOMAS MULLER": 2, "TONI KROOS":3,"GONZALO HIGUAI
         var name = (Object.keys(this.idNameMap).find(key => this.idNameMap[key] == res[i]['clientId']));  
         var seriesElement ={ 'name': "", 'data': []};
         var data = Array.apply(null, Array(Object.keys(res).length)).map(Number.prototype.valueOf,0);
-        console.log(data);
-        //seriesElement['data'] = data;
+        if(res[i]['clientId'] == i + 1)
         series.push(seriesElement);
       }
       console.log(series);
