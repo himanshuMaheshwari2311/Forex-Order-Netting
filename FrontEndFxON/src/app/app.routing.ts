@@ -9,6 +9,8 @@ import { TradehistoryComponent } from './tradehistory/tradehistory.component';
 import { OrdercreateComponent } from './ordercreate/ordercreate.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardBrokerComponent } from './dashboard-broker/dashboard-broker.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
 
 const routes: Routes =[
     {path: 'dashboard', component: DashboardComponent },
@@ -17,6 +19,8 @@ const routes: Routes =[
     {path: 'order', component: OrdercreateComponent},
     {path: 'watchlist', component: WatchlistComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'dashboard-broker', component: DashboardBrokerComponent},
+    {path: 'client-details', component:ClientDetailsComponent},
     {path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 

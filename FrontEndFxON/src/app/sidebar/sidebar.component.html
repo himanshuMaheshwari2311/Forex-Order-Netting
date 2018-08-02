@@ -1,5 +1,5 @@
 
-<div class="sidebar-wrapper">
+<div class="sidebar-wrapper" style="position: fixed; height: 100%"> 
   <div class="logo">
       <a href="http://www.db.com" class="simple-text">
           <div class="logo-img">
@@ -9,12 +9,6 @@
       </a>
   </div>
   <ul class="nav responsive-nav">
-      <li *ngIf="isMobileMenu()">
-         <a href="">
-            <i class="pe-7s-id"></i>
-            <p>Account</p>
-          </a>
-      </li>
       <li *ngIf="isMobileMenu()">
           <a>
             <i class="pe-7s-lock"></i>

@@ -1,14 +1,35 @@
 <div class="wrapper">
-  <div class="sidebar" data-color="blue" data-image="">
-      <app-sidebar></app-sidebar>
-      <div class="sidebar-background" style="background-image: url(/assets/img/exchange.jpeg)"></div>
-  </div>
-
-  <div class="main-panel">
-      <app-navbar></app-navbar>
-      <router-outlet></router-outlet>
-      <div *ngIf="isMap('maps')">
-          <app-footer></app-footer>
+  <div *ngIf="isLoggedIn();">
+    <div *ngIf="isClient()">
+      <div class="sidebar" data-color="blue" data-image="" style="position: fixed; height: 100%">
+          <app-sidebar></app-sidebar>
+          <div class="sidebar-background" style="background-image: url(/assets/img/exchange.jpeg)"></div>
       </div>
+
+      <div class="main-panel">
+          <app-navbar></app-navbar>
+          <router-outlet></router-outlet>
+          <div *ngIf="isMap('maps')">
+                  <app-footer></app-footer>
+          </div>
+      </div>
+    </div>
+    <div *ngIf="!isClient()">
+        <div class="sidebar" data-color="blue" data-image="" style="position: fixed; height: 100%">
+            <app-sidebar-broker></app-sidebar-broker>
+            <div class="sidebar-background" style="background-image: url(/assets/img/exchange.jpeg)"></div>
+        </div>
+  
+        <div class="main-panel">
+            <app-navbar></app-navbar>
+            <router-outlet></router-outlet>
+            <div *ngIf="isMap('maps')">
+                <app-footer></app-footer>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div *ngIf="!isLoggedIn()">
+    <app-login></app-login>
   </div>
 </div>

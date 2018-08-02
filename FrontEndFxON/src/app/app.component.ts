@@ -23,4 +23,23 @@ export class AppComponent {
     }
   }
 
+  isLoggedIn(){
+    if(sessionStorage['curr_sess'] == null){
+        return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  isClient(){
+    var obj = JSON.parse(sessionStorage.getItem("curr_sess"));
+    if(obj['roleId'] == 2){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
 }

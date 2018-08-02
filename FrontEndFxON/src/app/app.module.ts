@@ -20,6 +20,9 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import {LoginService} from './login/login.service';
+import { SidebarBrokerComponent } from './sidebar-broker/sidebar-broker.component';
+import { DashboardBrokerComponent } from './dashboard-broker/dashboard-broker.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import {LoginService} from './login/login.service';
     WatchlistComponent,
     OrdercreateComponent,
     TradehistoryComponent,
-    LoginComponent
+    LoginComponent,
+    SidebarBrokerComponent,
+    DashboardBrokerComponent,
+    ClientDetailsComponent
   ],
   imports: [
     BrowserModule,

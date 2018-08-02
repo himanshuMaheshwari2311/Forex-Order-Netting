@@ -7,7 +7,7 @@
                         <h4 class="title">Create Order</h4>
                     </div>
                     <div class="content">
-                        <form novalidate (ngSubmit)="createOrder(orderForm)" #orderForm="ngForm">
+                        <form (ngSubmit)="createOrder(orderForm)" #orderForm="ngForm">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -37,11 +37,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Currency Pair</label>
-                                        <select type="number" name="Currency Type" class="form-control" placeholder="" value="" [(ngModel)]="order.ccyId" name="ccyId"> 
+                                        <select type="number" name="Currency Type" class="form-control" placeholder="" value="" [(ngModel)]="order.ccyId" name="ccyId" required> 
                                           <option value="" disabled selected>--Select--</option>
                                           <option value=1>EUR/USD</option>
-                                          <option value=2>GBP/USD</option>
-                                          <option value=3>GBP/EUR</option>
+                                          <option value=3>GBP/USD</option>
+                                          <option value=2>GBP/EUR</option>
                                         </select>
                                     </div>
                                 </div>
@@ -57,13 +57,19 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Base Notional Amount</label>
                                         <input type="number" class="form-control" placeholder="Base Notional Ammount" value="" [(ngModel)]="order.baseNotional" name="baseNotional">
                                     </div>
                                 </div>
-                                
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Trade Date</label>
+                                        <input type="date" class="form-control" value=""><!--[(ngModel)]="order.date" name="date"-->
+                                    </div>
+                                </div>
+
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" value= "getClientId()" [(ngModel)]="order.clientId" name="clientId" >

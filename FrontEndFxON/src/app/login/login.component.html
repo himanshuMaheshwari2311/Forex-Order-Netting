@@ -1,33 +1,35 @@
-<div class="main-content" align="center" style="margin:0 auto;" >
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 align-items-center">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title" align="center">Login</h4>
-                    </div>
-                    <div class="content">
-                        <form novalidate (ngSubmit)="onLoginSubmit(loginForm)" #loginForm="ngForm">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" [(ngModel)] = "user.userName" class="form-control" placeholder="Username" value="" name="userName">
+   
+   <div class="main-content " style="margin-top: 15%; margin-left: 30%; ">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <div class="col-md-6" >
+                    <div class="card " >
+                        <div class="header">
+                            <h4 class="title">Login</h4>
+                        </div>
+                        <div class="content">
+                            <form novalidate (ngSubmit)="onLoginSubmit(loginForm)" #loginForm="ngForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" [(ngModel)] = "user.userName" class="form-control" placeholder="Username" value="" name="userName">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="password" [(ngModel)] = "user.password" class="form-control" placeholder="Password" value="" name="password">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="password" [(ngModel)] = "user.password" class="form-control" placeholder="Password" value="" name="password">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-info btn-fill pull-left">Login</button>
-                            <div class="clearfix"></div>
-                        </form>
+                                <button type="submit" class="btn btn-info btn-fill pull-left">Login</button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

@@ -36,6 +36,7 @@ export class OrdercreateComponent implements OnInit {
     this.order['ccyId'] = Number(this.order['ccyId']);
     this.order['clientId'] = this.obj['userId'];
     this.order['price'] = 1.774;
+    
     console.log(this.order);
 
     this.coService.createOrder(this.order).subscribe(data=>{

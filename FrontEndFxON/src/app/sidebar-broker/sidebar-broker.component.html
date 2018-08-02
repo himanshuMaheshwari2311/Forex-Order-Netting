@@ -1,0 +1,27 @@
+
+<div class="sidebar-wrapper" style="position: fixed; height: 100%"> 
+    <div class="logo">
+        <a href="http://www.db.com" class="simple-text">
+            <div class="logo-img">
+                <!--img src="#"/-->
+            </div>
+            Forex Engine
+        </a>
+    </div>
+    <ul class="nav responsive-nav">
+        <li *ngIf="isMobileMenu()">
+            <a>
+              <i class="pe-7s-lock"></i>
+              <p>Log out</p>
+            </a>
+        </li>
+        <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+            <a  [routerLink]="[menuItem.path]">
+                <i class="{{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+  </div>
+  
