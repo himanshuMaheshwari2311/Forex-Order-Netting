@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CreateOrderService } from './create-order.service';
 
 import { Order } from '../order';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ordercreate',
@@ -11,17 +12,29 @@ export class OrdercreateComponent implements OnInit {
   user_code: string;
   user_full_name: string;  
   obj: any;
+  public headerRow : string[];
+  public dataRows = new Array();
+  time: any;
   
   private order = new Order();
   
-  constructor(private coService: CreateOrderService) {
+  constructor(private coService: CreateOrderService, private http: HttpClient) {
     this.obj = JSON.parse(sessionStorage.getItem("curr_sess"));
     this.loadSessionData();
     
     }
 
   ngOnInit() {
-  
+    this.headerRow = ["Currency Pair", "Price"];
+    this.http.get("https://forex.1forge.com/1.0.3/quotes?pairs=EURUSD,GBPEUR,GBPUSD&api_key=qlajbqVH3vSEL3pn2EgoHQ6mwdKvKMRU").subscribe(res=>{
+      for(var i in res){
+        var data = new Array();
+        data.push(res[i]['symbol']);
+        data.push(res[i]['price']);
+        this.dataRows.push(data);
+        this.time = new Date(res[i]['timestamp'] * 1000);
+      }
+    });
   }
 
   loadSessionData(){
@@ -44,7 +57,8 @@ export class OrdercreateComponent implements OnInit {
     });
 
   }
-
-
+  getDetails(value){
+    
+  }
 
 }
