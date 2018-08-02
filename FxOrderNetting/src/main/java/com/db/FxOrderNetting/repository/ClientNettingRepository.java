@@ -13,9 +13,17 @@ import java.util.Map;
 public class ClientNettingRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
+
     public List<ClientNetting> getClientNettingValue()
     {
         String sql="call forexNetting.clientNetting()";
+        ClientNettingMapper clientNettingMapper = new ClientNettingMapper();
+        return jdbcTemplate.query(sql, clientNettingMapper );
+    }
+
+    public List<ClientNetting> getSpecificClientNettingValue(int clientId)
+    {
+        String sql="call forexNetting.specificClientNetting("+ clientId +")";
         ClientNettingMapper clientNettingMapper = new ClientNettingMapper();
         return jdbcTemplate.query(sql, clientNettingMapper );
     }
