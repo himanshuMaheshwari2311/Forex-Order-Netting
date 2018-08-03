@@ -71,7 +71,7 @@ export class OrdercreateComponent implements OnInit {
     
     alert("Order Created");
 
-    this.router.navigate(['/order']);
+    this.router.navigate(['/dashboard']);
     
   }
   getOrderType(value){

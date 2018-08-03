@@ -28,10 +28,15 @@ export class LoginComponent implements OnInit {
         if(data['userId'] == 0){
             console.log("Invalid Login");
           }
-        else{
+        else if(data['roleId'] == 2){
           sessionStorage.setItem('curr_sess', JSON.stringify(data));
           console.log(sessionStorage.getItem('curr_sess'));
           this.router.navigate(['/dashboard']);
+        }
+        else{
+          sessionStorage.setItem('curr_sess', JSON.stringify(data));
+          console.log(sessionStorage.getItem('curr_sess'));
+          this.router.navigate(['/dashboard-broker']);  
         }
       });
 

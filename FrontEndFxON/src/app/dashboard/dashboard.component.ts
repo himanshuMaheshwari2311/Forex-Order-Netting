@@ -55,11 +55,12 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    this.headerRow3 = ['Currency Pair', 'Net Position', "Direction"]
+    this.headerRow3 = ['Currency Pair', "Value Date", 'Net Position', "Direction"]
     this.http.get("http://localhost:8090/client/specificClientNetting/" + this.id).subscribe(res=>{
       for(var i in res){
         var temp = new Array();
         temp.push(res[i]['ccyCode']);
+        temp.push(res[i]['valueDate']);
         temp.push(res[i]['net'] < 0 ? res[i]['net'] * -1 : res[i]['net']);
         temp.push(res[i]['ccyCode'] < 0 ? "S" : "B");
         this.dataRows3.push(temp)
@@ -67,12 +68,13 @@ export class DashboardComponent implements OnInit {
 
     })
 
-    this.headerRow = ["Trade Number", "Currency Pair", "Base Notional", "Price", "Volume", "Direction"];
+    this.headerRow = ["Trade Number", "Value Date" ,"Currency Pair", "Base Notional", "Price", "Volume", "Direction"];
     this.http.post("http://localhost:8090/orders/getAllTrade", null).subscribe(res=>{
       for(var data in res){
         if(res[data]['clientId'] == JSON.parse(sessionStorage.getItem('curr_sess'))['userId']){
             var ele = new Array();
             ele.push(res[data]['orderId']);
+            ele.push(new Date(res[data]['valueDate']).toDateString());
             if(res[data]['ccyId'] == 1){
             ele.push("EUR/USD");
             } 

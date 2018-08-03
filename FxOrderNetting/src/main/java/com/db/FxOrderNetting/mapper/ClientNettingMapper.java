@@ -13,6 +13,7 @@ public class ClientNettingMapper implements RowMapper<ClientNetting> {
         clientNetting.setClientName(rs.getString("clientName"));
         clientNetting.setCcyCode(rs.getString("ccyCode"));
         clientNetting.setNet(rs.getLong("net"));
+        clientNetting.setValueDate(rs.getDate("valueDate"));
         return clientNetting;
     }
 }

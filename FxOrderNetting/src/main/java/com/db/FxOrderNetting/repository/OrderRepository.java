@@ -23,7 +23,7 @@ public class OrderRepository {
     JdbcTemplate jdbcTemplate;
 
     public List<Orders> getAllOrders(){
-        String sql = "select * from orders";
+        String sql = "select * from orders order by tradeDate desc";
         return jdbcTemplate.query(sql , new BeanPropertyRowMapper<>(Orders.class));
     }
 
@@ -43,7 +43,7 @@ public class OrderRepository {
     }
 
     public List<Orders> getAllTrades() {
-        String sql =  "Select * from orders where ValueDate <= CURDATE()";
+        String sql =  "Select * from orders where ValueDate <= CURDATE() order by tradeDate desc";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Orders.class));
     }
 

@@ -22,11 +22,23 @@ export class TradehistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headerRow = ["Trade Number", "Currency Pair", "Price", "Volume", "Direction"];
+    this.headerRow = ["Value Date", "Order Type", "Currency Pair", "Price", "Volume", "Direction"];
     this.http.post("http://localhost:8090/orders/getAllTrade", null).subscribe(res=>{
       for(var data in res){
         var ele = new Array();
-        ele.push(res[data]['orderId']);
+        ele.push(new Date(res[data]['valueDate']).toDateString());
+        if(res[data]['tradeTypeId'] == 1){
+          ele.push("Cash");
+        }
+        else if(res[data]['tradeTypeId'] == 2){
+          ele.push("TOM");
+        }
+        else if(res[data]['tradeTypeId'] == 3){
+          ele.push("SPOT");
+        }
+        else if(res[data]['tradeTypeId'] == 4){
+          ele.push("Forward");
+        } 
         if(res[data]['ccyId'] == 1){
           ele.push("EUR/USD");
         } 

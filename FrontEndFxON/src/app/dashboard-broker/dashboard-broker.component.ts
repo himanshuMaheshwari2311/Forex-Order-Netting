@@ -75,12 +75,13 @@ idNameMap = {"MESUT OZIL": 1, "THOMAS MULLER": 2, "TONI KROOS":3,"GONZALO HIGUAI
         this.time = new Date(res[i]['timestamp'] * 1000);
       }
     });
-    this.headerRow = ["Currency Pair", "Net Order", "Direction"]
+    this.headerRow = ["Currency Pair",  "Value Date", "Net Order", "Direction"]
 
     this.http.get("http://localhost:8090/broker/getCurrNet").subscribe(res=>{
       for(var i in res){
         var temp = new Array();
         temp.push(res[i]['ccyCode']);
+        temp.push(res[i]['valueDate']);
         temp.push(res[i]['Net'] < 0 ? res[i]['Net'] * -1 : res[i]['Net']);
         if(res[i]['Net'] < 0) {
           temp.push("S");

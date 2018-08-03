@@ -50,7 +50,7 @@ export class ClientDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.headerRow = ["Trade Number", "Currency Pair", "Base Notional", "Price", "Volume", "Direction"];
-    this.headerRowNet = ["Currency Pair", "Net Amount", "Direction"]
+    this.headerRowNet = ["Currency Pair", "Value Date", "Net Amount", "Direction"]
   }
 
   getClientDetails({value}){
@@ -90,6 +90,7 @@ export class ClientDetailsComponent implements OnInit {
         if(res[i]['clientName'] == value['name']){
           var temp = new Array();
           temp.push(res[i]['ccyCode']);
+          temp.push(res[i]['valueDate']);
           temp.push(res[i]['net'] < 0 ? res[i]['net'] * -1 : res[i]['net']);
           if(res[i]['net'] < 0) {
             temp.push("S");
