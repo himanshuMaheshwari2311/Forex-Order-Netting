@@ -43,9 +43,7 @@ public class OrderRepository {
     }
 
     public List<Orders> getAllTrades() {
-        String sql =  "Select * from orders " +
-                "where TradeDate is not null "+
-                "order by createdAt";
+        String sql =  "Select * from orders where ValueDate <= CURDATE()";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Orders.class));
     }
 
