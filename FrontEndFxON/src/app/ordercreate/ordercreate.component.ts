@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateOrderService } from './create-order.service';
+import { Router } from '@angular/router';
 
 import { Order } from '../order';
 import { HttpClient } from '@angular/common/http';
@@ -29,7 +30,7 @@ export class OrdercreateComponent implements OnInit {
   
   private order = new Order();
   
-  constructor(private coService: CreateOrderService, private http: HttpClient) {
+  constructor(private coService: CreateOrderService, private http: HttpClient, private router: Router) {
     this.obj = JSON.parse(sessionStorage.getItem("curr_sess"));
     this.loadSessionData();
     
@@ -64,11 +65,14 @@ export class OrdercreateComponent implements OnInit {
     this.order['quoteCurrency'] = this.quotePrice;
     console.log(new Date().getDate());
     console.log(this.order);
-
+    var data;
     this.coService.createOrder(this.order).subscribe(data=>{
-
     });
+    
+    alert("Order Created");
 
+    this.router.navigate(['/order']);
+    
   }
   getOrderType(value){
     console.log(value);
@@ -77,7 +81,11 @@ export class OrdercreateComponent implements OnInit {
     var date, month, year;
     month = td.getMonth() + 1;
     year = td.getFullYear();
-    if(value == 1 || value == 3){
+    if(value == 1){
+      date = td.getDate();
+    }
+    else if(value == 3){
+      td.setDate(td.getDate() + 2);
       date = td.getDate();
     }
     else if(value == 2){

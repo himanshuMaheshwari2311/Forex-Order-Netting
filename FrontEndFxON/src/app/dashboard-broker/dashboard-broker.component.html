@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Net Order</h4>
@@ -23,13 +23,40 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="card col-md-12" #Buy>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Market Rates</h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                          <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let cell of headerRow1">{{ cell }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of dataRows1">
+                                        <td *ngFor="let cell of row">{{cell}}</td>
+                                    </tr>
+                                </tbody>
+                          </table>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="card col-md-12" #Sell>
+            <div class="card col-md-12" #EURUSD>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card col-md-12" #GBPEUR>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="card col-md-12" #GBPUSD>
             </div>
         </div>
     </div>

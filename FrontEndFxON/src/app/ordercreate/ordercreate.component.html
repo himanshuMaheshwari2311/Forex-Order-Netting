@@ -31,7 +31,7 @@
                                           <option [ngValue]=1>Cash</option>
                                           <option [ngValue]=2>TOM</option>
                                           <option [ngValue]=3>SPOT</option>
-                                          <option [ngValue]=3>Forward</option>
+                                          <option [ngValue]=4>Forward</option>
                                         </select>
                                     </div>
                                 </div>
@@ -80,16 +80,10 @@
                                 </div> -->
                             </div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Execution Date</label>
-                                        <input type="text" class="form-control" value="{{this.date}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Price</label>
-                                        <input type="number" class="form-control" value="{{this.currencyPrice}}">
+                                        <input type="text" class="form-control" value="{{this.date}}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -100,18 +94,27 @@
                                         <input type="number" class="form-control" placeholder="Base Notional Ammount" value="" ngModel (ngModelChange)="getBase($event)" [(ngModel)]="order.baseNotional" name="baseNotional">
                                     </div>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label>Quote Price</label>
-                                        <input type="number" class="form-control" placeholder="Quote Price" value="{{this.quotePrice}}">
-                                    </div>
-                                </div>
-
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" value= "getClientId()" [(ngModel)]="order.clientId" name="clientId" >
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Price</label>
+                                                <input type="number" class="form-control" value="{{this.currencyPrice}}"  disabled>
+                                            </div>
+                                    </div>
+                                    
+                                <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label>Quote Price</label>
+                                            <input type="number" class="form-control" placeholder="Quote Price" value="{{this.quotePrice}}">
+                                        </div>
+                                    </div>
+    
                             </div>
                             <button type="submit" class="btn btn-info btn-fill pull-left">Create Order</button>
                             <div class="clearfix"></div>

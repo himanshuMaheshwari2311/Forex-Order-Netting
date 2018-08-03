@@ -12,13 +12,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" placeholder="Company" value="">
+                                        <input type="text" class="form-control" placeholder="Company" value="{{this.fname}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Last Name" value="">
+                                        <input type="text" class="form-control" placeholder="Last Name" value=" {{this.lname}}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -26,7 +26,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Username / Client Code</label>
-                                        <input type="text" class="form-control" placeholder="Username" value="">
+                                        <input type="text" class="form-control" placeholder="Username" value="{{this.code}}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                             <a href="#">
                                 <img class="avatar border-gray" src="assets/img/default-avatar.png" alt="..."/>
 
-                                <h4 class="title">John Doe<br />
+                                <h4 class="title">{{this.name}}<br />
                                 </h4>
                             </a>
                         </div>

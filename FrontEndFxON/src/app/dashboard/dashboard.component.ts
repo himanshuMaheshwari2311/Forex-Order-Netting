@@ -15,6 +15,11 @@ export class DashboardComponent implements OnInit {
   public dataRows = new Array();
   public headerRow1: string[];
   public dataRows1 = new Array();
+  
+  public headerRow3: string[];
+  public dataRows3 = new Array();
+  public headerRow2: string[];
+  public dataRows2= new Array();
   obj: any;
 
   @ViewChild('Buy') Buy: ElementRef;
@@ -29,7 +34,10 @@ export class DashboardComponent implements OnInit {
   chart1 : Highcharts.ChartObject;
   chart2 : Highcharts.ChartObject;
 
+  temp = JSON.parse(sessionStorage.getItem('curr_sess'));
+  id = this.temp['userId'];
   time;
+  name = this.temp['name'];
   
   constructor(private http: HttpClient) { }
 
@@ -46,6 +54,18 @@ export class DashboardComponent implements OnInit {
         this.time = new Date(res[i]['timestamp'] * 1000);
       }
     });
+
+    this.headerRow3 = ['Currency Pair', 'Net Position', "Direction"]
+    this.http.get("http://localhost:8090/client/specificClientNetting/" + this.id).subscribe(res=>{
+      for(var i in res){
+        var temp = new Array();
+        temp.push(res[i]['ccyCode']);
+        temp.push(res[i]['net'] < 0 ? res[i]['net'] * -1 : res[i]['net']);
+        temp.push(res[i]['ccyCode'] < 0 ? "S" : "B");
+        this.dataRows3.push(temp)
+      }
+
+    })
 
     this.headerRow = ["Trade Number", "Currency Pair", "Base Notional", "Price", "Volume", "Direction"];
     this.http.post("http://localhost:8090/orders/getAllTrade", null).subscribe(res=>{
@@ -414,7 +434,6 @@ export class DashboardComponent implements OnInit {
       }
       this.chart5 = chart(this.GBPUSD.nativeElement, options);
     });
-
 }
 
 }
